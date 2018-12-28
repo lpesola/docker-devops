@@ -1,0 +1,19 @@
+➜  backend-example-docker git:(master) d ocker run -v /Users/laurapesola/Private\ Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt -p 8000:8000 hy-backend
+
+> backend-example-docker@1.0.0 start /app
+> cross-env NODE_ENV=production node index.js
+
+Started on port 8000
+
+
+Logfile: 
+➜  backend-example-docker git:(master) ✗ tail ../docker-mount/logs.txt
+2018-12-28 12:33:42: Connection received in root
+2018-12-28 12:33:42: Connection received in root
+2018-12-28 12:33:43: Connection received in root
+2018-12-28 12:33:43: Connection received in root
+2018-12-28 12:33:43: Connection received in root
+2018-12-28 12:33:44: Connection received in root
+2018-12-28 12:33:44: Connection received in root
+2018-12-28 12:33:44: Connection received in root
+

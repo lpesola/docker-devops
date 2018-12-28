@@ -1,0 +1,158 @@
+EXCERCISES 1.1. - 1.3
+1.1
+
+Three containers running
+'docker ps'
+CONTAINER ID        IMAGE                         COMMAND                  CREATED              STATUS              PORTS               NAMES
+63f28502695d        mongo                         "docker-entrypoint.s…"   42 seconds ago       Up 40 seconds       27017/tcp           lucid_greider
+f74f3ac422c4        nginx                         "nginx -g 'daemon of…"   About a minute ago   Up About a minute   80/tcp              recursing_kalam
+2b0432d49308        gitlab/gitlab-runner:latest   "/usr/bin/dumb-init …"   34 minutes ago       Up 34 minutes                           gitlab-runner
+
+'docker stop 63f f74'
+63f
+f74f
+'docker ps'
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS              PORTS               NAMES
+2b0432d49308        gitlab/gitlab-runner:latest   "/usr/bin/dumb-init …"   35 minutes ago      Up 35 minutes                           gitlab-runner
+
+
+1.2
+We’ve left containers and a image that won’t be used anymore and are taking space, as docker ps -a and docker images will reveal. Clean the docker daemon from all images and containers.
+Prove that you have completed this part of exercise by delivering the output for docker ps -a and docker images
+
+➜  docker-devops git:(master) ✗ docker ps -a
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                      PORTS                      NAMES
+63f28502695d        mongo                         "docker-entrypoint.s…"   4 minutes ago       Exited (0) 3 minutes ago                               lucid_greider
+f74f3ac422c4        nginx                         "nginx -g 'daemon of…"   4 minutes ago       Exited (0) 3 minutes ago                               recursing_kalam
+ef11d08aeb44        nginx                         "nginx -g 'daemon of…"   6 minutes ago       Exited (0) 4 minutes ago                               laughing_jennings
+bc55194ffdaa        gitlab/gitlab-runner          "/usr/bin/dumb-init …"   37 minutes ago      Exited (1) 37 minutes ago                              eager_visvesvaraya
+7281efc66a10        gitlab/gitlab-runner          "/usr/bin/dumb-init …"   37 minutes ago      Exited (1) 37 minutes ago                              ecstatic_bhabha
+2b0432d49308        gitlab/gitlab-runner:latest   "/usr/bin/dumb-init …"   38 minutes ago      Up 38 minutes                                          gitlab-runner
+861fb5a3331b        gitlab/gitlab-runner          "/usr/bin/dumb-init …"   43 minutes ago      Exited (1) 43 minutes ago                              vigilant_mahavira
+99ccbe91d49c        gitlab/gitlab-runner          "/usr/bin/dumb-init …"   44 minutes ago      Exited (0) 44 minutes ago                              nostalgic_engelbart
+fecefecc7915        gitlab/gitlab-runner          "/usr/bin/dumb-init …"   45 minutes ago      Exited (1) 45 minutes ago                              optimistic_meitner
+41297cf63613        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 blissful_grothendieck
+c67a49619bca        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 wonderful_jepsen
+8bab3986fda3        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 heuristic_hofstadter
+9ed69ac49f7a        mongo:4.0.3                   "docker-entrypoint.s…"   2 weeks ago         Exited (255) 4 days ago     0.0.0.0:27017->27017/tcp   domongo
+8fe149f48ac4        mongo:4.0.3                   "docker-entrypoint.s…"   2 weeks ago         Exited (0) 2 weeks ago                                 friendly_elgamal
+17be70b7f6c9        mongo:4.0.3                   "docker-entrypoint.s…"   2 weeks ago         Exited (2) 2 weeks ago                                 blissful_chatterjee
+c9fff48a3f88        mongo:4.0.3                   "docker-entrypoint.s…"   2 weeks ago         Exited (0) 2 weeks ago                                 agitated_bardeen
+a47b89389cce        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 hungry_antonelli
+edf4ac7a930c        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 cranky_hamilton
+98df36c4a0a9        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 mystifying_dewdney
+c995345d0364        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 vibrant_mayer
+b82430f78916        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 silly_aryabhata
+1f0100ffeec0        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 serene_euler
+db0e823db2be        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 recursing_hawking
+
+➜  docker-devops git:(master) ✗ docker images
+REPOSITORY                                                                     TAG                 IMAGE ID            CREATED             SIZE
+gitlab/gitlab-runner                                                           latest              63fe7a77a8bd        11 days ago         393MB
+storage-local-test                                                             latest              a413a0ecc4f8        2 weeks ago         861MB
+nginx                                                                          latest              568c4670fa80        2 weeks ago         109MB
+mongo                                                                          latest              525bd2016729        4 weeks ago         383MB
+mongo                                                                          4.0.3               05b3651ee24e        2 months ago        382MB
+jshimko/meteor-launchpad                                                       latest              860b65588323        13 months ago       124MB
+
+➜  docker-devops git:(master) ✗ docker container prune
+WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N] y
+Deleted Containers:
+63f28502695dca9cdebaf72a07a35fab0323aa2b1dadf1f477e6b2e14482e9a3
+f74f3ac422c4f503f820df147e2e5efac87297fd428ac5e2a1345680d7102901
+ef11d08aeb44765548baca6a39876cde89648fd232b2933a97e21dc3c47b26e0
+bc55194ffdaab3e747b0153b21217d100a2f841eb71bc0acea9342299a624305
+7281efc66a10d35e22a6b9c029a1ff619652c5132aae52f3b10efce148bfb8d2
+861fb5a3331b72f10fa782356e6ac14ac493260acc96ba90afa31333dd97cdbe
+99ccbe91d49cdee89262dd85babf90c78a3464a3cbd4ff51de8a9460e350ec78
+fecefecc79151be2a3834a3cab5fb153b5cc5bae2634e41b1495afdc419bbb2d
+41297cf6361316434d6f8b818f7cb7266582c0b9c0ad4ac2aad32653ec94b4d5
+c67a49619bca5dc10b65e246efc545d55781ec7564a47a5f730626d6fd76a977
+8bab3986fda395899472d252dec49e17b05292d36e241191a4ad7a61ed02f462
+9ed69ac49f7acfbebefcf12f57f1f6bbf74398dbc7d1a7060108ef1f7c392c20
+8fe149f48ac4244cc540fbc4d84014195d0bef3f391cb0a114f99efc4c16b3d5
+17be70b7f6c9fd9100878824c5ad37f5804df7b25b3714b6b2d200b77476de2b
+c9fff48a3f88b4cd4faf32ec57858161a6c8517041d1bcd5566660e39a1e2643
+a47b89389ccebc33f5c8bf82e1b73a3f5008152c8b7191abf0c398402215bff8
+edf4ac7a930c12b087d357c8caea239117b92d65293a150f1b699a4613c3fbfa
+98df36c4a0a91d997e3a5afd8e14a0aa020eda5637649b89b71ddeea6e4d9cf9
+c995345d0364571d875cd98d0db31538849afc2f6f22c4cc86fcdda92249e1cd
+b82430f78916f3f64acc18180b4d1050c59cf0101e678959cfa5e23a6d78b16a
+1f0100ffeec04ebe4ea4dcc50ce9d5c330a5f9d333004518be969eae2a9226be
+db0e823db2be4280e6b5c1c18d005bde2905f246dd3869620d89f49c9548ea19
+
+Total reclaimed space: 32kB
+➜  docker-devops git:(master) ✗ docker ps -a
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS              PORTS               NAMES
+2b0432d49308        gitlab/gitlab-runner:latest   "/usr/bin/dumb-init …"   39 minutes ago      Up 39 minutes                           gitlab-runner
+
+➜  docker-devops git:(master) ✗ docker rmi nginx mongo mongo
+Untagged: nginx:latest
+Untagged: nginx@sha256:5d32f60db294b5deb55d078cd4feb410ad88e6fe77500c87d3970eca97f54dba
+Deleted: sha256:568c4670fa800978e08e4a51132b995a54f8d5ae83ca133ef5546d092b864acf
+Deleted: sha256:ac0442c0fafd48e24a96fa3099ea7ad20012c8759e1dd03dd387dbfbe382984c
+Deleted: sha256:6b9d35d8d75115937cd78da275f527cccef672cbd71f34062dffe2e930fd7e13
+Deleted: sha256:ef68f6734aa485edf13a8509fe60e4272428deaf63f446a441b79d47fc5d17d3
+Untagged: mongo:latest
+Untagged: mongo@sha256:0823cc2000223420f88b20d5e19e6bc252fa328c30d8261070e4645b02183c6a
+Deleted: sha256:525bd2016729a161cffa87b2ab606afabc5d95e744077259613d77b22533a3de
+Deleted: sha256:0a5c6f46b6909c6235943bc35cde3b14bc93cfb7f55a35b34d21a5780457bbcb
+Deleted: sha256:506040f690a9b01c9c04d03ea8518b988dc03ac01af76b62003c23105ff58c83
+Deleted: sha256:9beffd64b1919ee33915aa3844fe316984ea71ee6a257f73568a0b32d59f47a9
+Deleted: sha256:5c2b093d136f12acf9afc6aa4dbef179cdecacef1fd899b8dff3eca6924a2cfd
+Deleted: sha256:5d92732d9901e9327e7df824b1e53be8d33aa7ad162bddf00b487be1b4b288f0
+Deleted: sha256:fe12a6d137bf6765d33810ffb113ff64f12356fdbda39a17df57d5789e61edb1
+Deleted: sha256:330ef0e63d48eaba844a1831cfdf708e41c04cf97a73e474b81f4e6969172d72
+Deleted: sha256:62b174d79ce2464e9e8e22f1eac92064111eb4a891c9d8b11c22a80b2e48a5ed
+Deleted: sha256:0f25309aaa2d782676903bd1260aaa1635539b07e9723073760cfee80c56db62
+Error: No such image: mongo
+
+➜  docker-devops git:(master) ✗ docker images
+REPOSITORY                                                                     TAG                 IMAGE ID            CREATED             SIZE
+gitlab/gitlab-runner                                                           latest              63fe7a77a8bd        11 days ago         393MB
+storage-local-test                                                             latest              a413a0ecc4f8        2 weeks ago         861MB
+mongo                                                                          4.0.3               05b3651ee24e        2 months ago        382MB
+jshimko/meteor-launchpad
+
+
+EX 1.3
+-----------------------------------------------------------------------------------------------------------------
+➜  docker-devops git:(master) ✗ docker run --rm -it --name web ubuntu:16.04 sh -c 'apt -qq update; apt -qqy install curl; read website; sleep 3; curl http://$website;'
+<lot of apt output omitted>
+.
+.
+.
+148 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+helsinki.fi
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>301 Moved Permanently</title>
+</head><body>
+<h1>Moved Permanently</h1>
+<p>The document has moved <a href="http://www.helsinki.fi/">here</a>.</p>
+</body></html>
+
+Did not input any commands
+
+OR
+
+➜  docker-devops git:(master) ✗ docker run -d --rm -it --name web ubuntu:16.04 sh -c 'read website; sleep 3; curl http://$website;'
+➜  docker-devops git:(master) ✗ docker exec -it web bash
+in container
+apt update ; apt install -y curl 
+then
+➜  docker-devops git:(master) ✗ docker attach web
+helsinki.fi
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>301 Moved Permanently</title>
+</head><body>
+<h1>Moved Permanently</h1>
+<p>The document has moved <a href="http://www.helsinki.fi/">here</a>.</p>
+</body></html>
+
+
+

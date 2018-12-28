@@ -1,0 +1,7 @@
+➜  backend-example-docker git:(master) ✗ docker build -t hy-backend .
+➜  backend-example-docker git:(master) ✗ docker run -d -v /Users/laurapesola/Private\ Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt -p 8000:8000 hy-backend
+d7f147544c64dc84a2046b103775e80104917c0ea84ec1cc251bd4fec51f0a94
+
+➜  frontend-example-docker git:(master) ✗ docker build -t hy-frontend .
+➜  frontend-example-docker git:(master) docker run -d -p 5000:5000 hy-frontend
+439d2976c5d9b8073d5e2a75984d9287e877da6e650e4092ad9eaf6183a39d3f

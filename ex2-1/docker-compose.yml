@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  frontend:
+    build: /Users/laurapesola/Private Stuff/docker-devops-kurssi/frontend-example-docker 
+    volumes: 
+       - /Users/laurapesola/Private\ Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt
+    container_name: front 
+    ports:
+      - 5000:5000
+  backend:
+    build: /Users/laurapesola/Private Stuff/docker-devops-kurssi/backend-example-docker 
+    container_name: back
+    ports:
+       - 8000:8000
+

@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+  backend:
+    build: /Users/laurapesola/Private Stuff/docker-devops-kurssi/backend-example-docker 
+    container_name: hy-back
+    ports:
+       - 8000:8000
+    environment: 
+      - REDIS=redis
+  frontend:
+    build: /Users/laurapesola/Private Stuff/docker-devops-kurssi/frontend-example-docker 
+    volumes: 
+       - /Users/laurapesola/Private\ Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt
+    container_name: hy-front 
+    ports:
+      - 5000:5000
+

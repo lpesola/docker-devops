@@ -1,0 +1,8 @@
+To build:
+docker-compose build 
+To run:
+docker-compose up -d
+To stop
+docker-compose down
+
+With this config, frontend test button for ex. 2.5 works but others don't because of cross-origin policy (the origin for 1.7 is localhost:8000 while for the 2.5 button it's localhost)

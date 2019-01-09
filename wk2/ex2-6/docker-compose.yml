@@ -17,6 +17,7 @@ services:
     volumes: 
        - /Users/laurapesola/Private Stuff/docker-devops-kurssi/docker-mount/postgres:/var/lib/postgresql/data
   backend:
+    # the same image as was used in the previous exercises before compose
     build: /Users/laurapesola/Private Stuff/docker-devops-kurssi/backend-example-docker 
     container_name: hy-back
     depends_on:
@@ -31,6 +32,10 @@ services:
       - DB_HOST=postgres
   frontend:
     build: /Users/laurapesola/Private Stuff/docker-devops-kurssi/frontend-example-docker 
+   # to get rid of the cross origin policy issues we need to change the API url 
+   # the default in the old docker file can be overridden
+    environment: 
+      - API_URL=http://localhost/api/
     depends_on: 
      - backend 
     volumes: 

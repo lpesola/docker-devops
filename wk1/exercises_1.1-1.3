@@ -1,24 +1,31 @@
 EXCERCISES 1.1. - 1.3
-1.1
+###################################################
 
+1.1
+-------------------------------------------------------------------------------
 Three containers running
+➜  docker-devops git:(master) ✗ docker ps 
 'docker ps'
 CONTAINER ID        IMAGE                         COMMAND                  CREATED              STATUS              PORTS               NAMES
 63f28502695d        mongo                         "docker-entrypoint.s…"   42 seconds ago       Up 40 seconds       27017/tcp           lucid_greider
 f74f3ac422c4        nginx                         "nginx -g 'daemon of…"   About a minute ago   Up About a minute   80/tcp              recursing_kalam
 2b0432d49308        gitlab/gitlab-runner:latest   "/usr/bin/dumb-init …"   34 minutes ago       Up 34 minutes                           gitlab-runner
 
-'docker stop 63f f74'
+
+Stopping two of them
+➜  docker-devops git:(master) ✗ docker stop 63f f74
 63f
 f74f
-'docker ps'
+
+Stopped ontainers no longer running
+➜  docker-devops git:(master) ✗ docker ps 
 CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS              PORTS               NAMES
 2b0432d49308        gitlab/gitlab-runner:latest   "/usr/bin/dumb-init …"   35 minutes ago      Up 35 minutes                           gitlab-runner
 
 
 1.2
-We’ve left containers and a image that won’t be used anymore and are taking space, as docker ps -a and docker images will reveal. Clean the docker daemon from all images and containers.
-Prove that you have completed this part of exercise by delivering the output for docker ps -a and docker images
+-------------------------------------------------------------------------------
+Situation in the beginning: a number of stopped containers (and one running):
 
 ➜  docker-devops git:(master) ✗ docker ps -a
 CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                      PORTS                      NAMES
@@ -46,6 +53,7 @@ b82430f78916        storage-local-test            "pm2-runtime start p…"   2 w
 1f0100ffeec0        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 serene_euler
 db0e823db2be        storage-local-test            "pm2-runtime start p…"   2 weeks ago         Exited (0) 2 weeks ago                                 recursing_hawking
 
+Some images exist too:
 ➜  docker-devops git:(master) ✗ docker images
 REPOSITORY                                                                     TAG                 IMAGE ID            CREATED             SIZE
 gitlab/gitlab-runner                                                           latest              63fe7a77a8bd        11 days ago         393MB
@@ -55,6 +63,7 @@ mongo                                                                          l
 mongo                                                                          4.0.3               05b3651ee24e        2 months ago        382MB
 jshimko/meteor-launchpad                                                       latest              860b65588323        13 months ago       124MB
 
+Removing all containers that are stopped using prune:
 ➜  docker-devops git:(master) ✗ docker container prune
 WARNING! This will remove all stopped containers.
 Are you sure you want to continue? [y/N] y
@@ -83,11 +92,14 @@ b82430f78916f3f64acc18180b4d1050c59cf0101e678959cfa5e23a6d78b16a
 db0e823db2be4280e6b5c1c18d005bde2905f246dd3869620d89f49c9548ea19
 
 Total reclaimed space: 32kB
+
+Only the running container now left: 
 ➜  docker-devops git:(master) ✗ docker ps -a
 CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS              PORTS               NAMES
 2b0432d49308        gitlab/gitlab-runner:latest   "/usr/bin/dumb-init …"   39 minutes ago      Up 39 minutes                           gitlab-runner
 
-➜  docker-devops git:(master) ✗ docker rmi nginx mongo mongo
+Removing the images that are no longer needed (leaving the docker-runner as I still needed that for work stuff :-)) 
+➜  docker-devops git:(master) ✗ docker rmi nginx mongo
 Untagged: nginx:latest
 Untagged: nginx@sha256:5d32f60db294b5deb55d078cd4feb410ad88e6fe77500c87d3970eca97f54dba
 Deleted: sha256:568c4670fa800978e08e4a51132b995a54f8d5ae83ca133ef5546d092b864acf
@@ -106,8 +118,8 @@ Deleted: sha256:fe12a6d137bf6765d33810ffb113ff64f12356fdbda39a17df57d5789e61edb1
 Deleted: sha256:330ef0e63d48eaba844a1831cfdf708e41c04cf97a73e474b81f4e6969172d72
 Deleted: sha256:62b174d79ce2464e9e8e22f1eac92064111eb4a891c9d8b11c22a80b2e48a5ed
 Deleted: sha256:0f25309aaa2d782676903bd1260aaa1635539b07e9723073760cfee80c56db62
-Error: No such image: mongo
 
+Only images I still need are left:
 ➜  docker-devops git:(master) ✗ docker images
 REPOSITORY                                                                     TAG                 IMAGE ID            CREATED             SIZE
 gitlab/gitlab-runner                                                           latest              63fe7a77a8bd        11 days ago         393MB
@@ -117,7 +129,12 @@ jshimko/meteor-launchpad
 
 
 EX 1.3
------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+Run a container (Ubuntu) to curl the website. The website is given once the container is running. 
+I solved this in two ways, wasn't sure which one was the more appropriate to submit so here's both :)
+
+1) 
 ➜  docker-devops git:(master) ✗ docker run --rm -it --name web ubuntu:16.04 sh -c 'apt -qq update; apt -qqy install curl; read website; sleep 3; curl http://$website;'
 <lot of apt output omitted>
 .
@@ -135,10 +152,10 @@ helsinki.fi
 <p>The document has moved <a href="http://www.helsinki.fi/">here</a>.</p>
 </body></html>
 
-Did not input any commands
+This did not require inputting any commands
 
-OR
-
+2)
+First create and run the container, then in the container run bash
 ➜  docker-devops git:(master) ✗ docker run -d --rm -it --name web ubuntu:16.04 sh -c 'read website; sleep 3; curl http://$website;'
 ➜  docker-devops git:(master) ✗ docker exec -it web bash
 in container

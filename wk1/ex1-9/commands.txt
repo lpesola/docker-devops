@@ -1,2 +1,17 @@
-➜  libcoap-minimal git:(master) docker run -v "$(pwd)":/var/compilation libcoap /var/compilation/client.cc
-/var/compilation/client.cc:10:23: fatal error: coap/coap.h: No such file or directory
+This container makes available the libcoap C library 
+Libcoap is a minimal library supporting the new CoAP IoT protocol
+It doesn't require much, just C support and a few tools like automake
+This can be used to compile C programs that require the use of the libcoap library
+Currently it's not the smoothest thing to use but does what it's supposed to do. 
+Requires a volume that is accessible to the container.
+
+Build the container
+➜  wlgs git:(master) ✗ docker build -t libcoap .
+
+Usage
+➜  wlgs git:(master) ✗ docker run -v "$(pwd)":/opt/output libcoap /opt/output/client.c -o client.out
+Mounts the current directory as /opt/output which can then be used to compile programs
+
+This can be tested with the example apps from https://github.com/obgm/libcoap 
+
+Container found from https://cloud.docker.com/repository/docker/lpesola/libcoap-2/general

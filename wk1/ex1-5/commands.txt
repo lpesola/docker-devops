@@ -1,3 +1,4 @@
+Build the container
 ➜  frontend-example-docker git:(master) docker build -t ex1.5 .
 Sending build context to Docker daemon  688.6kB
 Step 1/6 : FROM node:8
@@ -29,6 +30,9 @@ Removing intermediate container 76933d412de5
 Successfully built 5958c1298c1d
 Successfully tagged ex1.5:latest
 
+Start the container (could've been started in background with -d but chose to
+run it in the foreground so it's easier to follow the logs and what's happening
+inside the container)  
 ➜  frontend-example-docker git:(master) docker run -p 5000:5000 ex1.5
 
 > frontend-example-docker@1.0.0 start /app

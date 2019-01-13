@@ -1,10 +1,14 @@
-➜  backend-example-docker git:(master) d ocker run -v /Users/laurapesola/Private\ Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt -p 8000:8000 hy-backend
+Build the container
+➜  backend-example-docker git:(master) docker build -t hy-backend .
 
+Run the container in background and mount a file that it can use for logs
+➜  backend-example-docker git:(master) docker run -d -v /Users/laurapesola/Private\ Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt -p 8000:8000 hy-backend
+
+Piece of the logfile (command: docker logs hy-backend)
 > backend-example-docker@1.0.0 start /app
 > cross-env NODE_ENV=production node index.js
 
 Started on port 8000
-
 
 Logfile: 
 ➜  backend-example-docker git:(master) ✗ tail ../docker-mount/logs.txt

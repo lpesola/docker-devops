@@ -1,4 +1,7 @@
+Build the container
 ➜  ex1-4 git:(master) ✗ docker build -t curler .
+
+Run the curler script in it
 ➜  ex1-4 git:(master) ✗ docker run -it curler
 helsinki.fi
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">

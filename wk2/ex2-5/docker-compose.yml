@@ -29,7 +29,7 @@ services:
     depends_on: 
      - backend 
     volumes: 
-       - /Users/laurapesola/Private\ Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt
+       - /Users/laurapesola/Private Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt
     container_name: hy-front 
     ports:
       - 5000:5000

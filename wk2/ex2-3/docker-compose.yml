@@ -12,6 +12,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=precess-vertex-spice-charge
   backend:
+   # use the image we defined in the earlier exercises
     build: /Users/laurapesola/Private Stuff/docker-devops-kurssi/backend-example-docker 
     container_name: hy-back
     ports:
@@ -22,9 +23,10 @@ services:
       - DB_PASSWORD=precess-vertex-spice-charge
       - DB_HOST=postgres
   frontend:
+   # use the image we defined in the earlier exercises
     build: /Users/laurapesola/Private Stuff/docker-devops-kurssi/frontend-example-docker 
     volumes: 
-       - /Users/laurapesola/Private\ Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt
+       - /Users/laurapesola/Private Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt
     container_name: hy-front 
     ports:
       - 5000:5000

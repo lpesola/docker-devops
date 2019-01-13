@@ -7,6 +7,7 @@ services:
     ports:
       - 6379:6379
   backend:
+# use the dockerfile defined in the previous exercises
     build: /Users/laurapesola/Private Stuff/docker-devops-kurssi/backend-example-docker 
     container_name: hy-back
     ports:
@@ -14,9 +15,10 @@ services:
     environment: 
       - REDIS=redis
   frontend:
+# use the dockerfile defined in the previous exercises
     build: /Users/laurapesola/Private Stuff/docker-devops-kurssi/frontend-example-docker 
     volumes: 
-       - /Users/laurapesola/Private\ Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt
+       - /Users/laurapesola/Private Stuff/docker-devops-kurssi/docker-mount/logs.txt:/app/logs.txt
     container_name: hy-front 
     ports:
       - 5000:5000

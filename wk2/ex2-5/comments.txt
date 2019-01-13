@@ -1,0 +1,4 @@
+It was only at this point that I realized that in the docker-compose.yml unescaped whitespaces work
+(and that escaping them in any way doesn't seem to work, at least on my computer)
+I fixed this for the previous exercise answers too. 
+When defining volume paths whitespaces have to be escaped.
